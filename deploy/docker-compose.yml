@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - CONFIG=dev_docker
+    restart: always
+    volumes:
+      - ..:/test_kanalservis
+    networks:
+      - test_kanalservis_net
+    command: ["sleep", "365d"]
+#    command: ["python", "main.py"]
+    depends_on:
+      - db
+
+  db:
+    image: postgres96:9.6.test_kanalservis
+    build: ./pg
+    volumes:
+      - "dbdata:/var/lib/postgresql/data"
+    networks:
+      - test_kanalservis_net
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+
+volumes:
+    dbdata:
+
+
+networks:
+  test_kanalservis_net:
+    name: test_kanalservis_net
+    driver: bridge

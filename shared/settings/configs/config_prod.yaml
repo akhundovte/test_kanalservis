@@ -1,0 +1,15 @@
+debug: false
+
+timezone: Europe/Moscow
+
+db:
+    drivername: postgresql+psycopg2
+    username:
+    password:
+    host:
+    port:
+    database:
+    schema: public
+    echo: false
+
+google_filename_key: serious-conduit-380114-5d92432c5c2c.json
